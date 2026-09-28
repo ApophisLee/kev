@@ -97,6 +97,7 @@ export function Playground() {
         <nav className="flex items-baseline gap-4 text-[15px]">
           <h1 className="font-medium tracking-tight">kev</h1>
           <Link href="/chess" className="text-muted-foreground hover:text-foreground">chess</Link>
+          <Link href="/tools" className="text-muted-foreground hover:text-foreground">tools</Link>
         </nav>
         <p className="text-[13px] text-muted-foreground">
           {model === null ? "connecting" : "error" in model ? `backend unavailable: ${model.error}` : <><span className="font-mono">{model.base}</span> · <span className="font-mono">{model.run}</span></>}

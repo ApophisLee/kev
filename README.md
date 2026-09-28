@@ -211,6 +211,8 @@ Open [localhost:3001](http://localhost:3001), load a preset, and edit the text a
 
 There's a [chess demo](http://localhost:3001/chess), too. The board is the input, legal moves are Choice options, and a Score question rates the position. You can play against Kev or let it play itself. Games are saved in `localStorage`.
 
+This branch also includes [Choice Programming](playground/TOOLS.md), an experimental playground co-authored by ApophisLee and GPT-6 Astra. Kev chooses tools, literal text fragments or characters, and memory actions to build small programs through a loop. Its Apple Silicon adapter counts every request with the native tokenizer and enforces a 3,000-token limit. The [feasibility report](playground/docs/choice-programming/README.md) includes one completed addition task and two earlier unsuccessful traces; these are development observations, not a reliability benchmark.
+
 ## API
 
 ### `POST /v1/systemone`

@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/.venv*/
 /.pnp
 .pnp.*
 .yarn/*
@@ -39,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local tool playground files, persistent memory and the latest run
+/.tool-playground/

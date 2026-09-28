@@ -1,0 +1,1563 @@
+{
+  "schema_version": 1,
+  "project": "Choice Programming",
+  "provenance": {
+    "attribution": "Co-authored by ApophisLee and GPT-6 Astra.",
+    "role_separation": "The playground implementation, tests, and report were co-authored by ApophisLee and GPT-6 Astra. The recorded decisions were made by jaredpalmer/kev-4b.",
+    "experimental": true,
+    "upstream_endorsement_claimed": false,
+    "publication_scope": "Three selected historical synthetic arithmetic development traces; not a benchmark or an exhaustive collection of attempts.",
+    "source_retention": "The successful arithmetic trace was recovered from the workspace reset archive. The interactive workspace has since been reused; live UI state is not the evidence record."
+  },
+  "method": {
+    "model": "jaredpalmer/kev-4b",
+    "checkpoint_revision": "139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+    "backend": "mlx",
+    "device": "mps",
+    "dtype": "bfloat16",
+    "max_input_tokens_per_decision": 3000,
+    "token_accounting": "Exact native Kev encoder count of the complete decision request; checked against server-reported input usage. Cumulative tokens count each recorded decision once, not duplicated per-step totals.",
+    "latency_accounting": "Sum of decision latency_ms values; not elapsed run wall time, GPU-only inference time, or tokens-per-second throughput.",
+    "task_conditioning": "Task-specific fragment dictionary plus configured character alphabet; no complete program offered as a single fragment. Expected output is included in the task checks.",
+    "append_fragments": {
+      "open_print": "print(",
+      "one": "1",
+      "plus": " + ",
+      "minus": " - ",
+      "close_call": ")\n"
+    },
+    "replacement_extra_fragment": {
+      "remove": ""
+    },
+    "completion_gate": "finish is available only after application checks pass; the model chooses whether to finish.",
+    "app_execution": "The application uses a restricted Python-subset evaluator and does not execute submitted Python through the operating system.",
+    "filesystem_scope": "Sandbox files are workspace-scoped; this is not an operating-system process sandbox."
+  },
+  "independent_success_verification": {
+    "interpreter": "CPython",
+    "version": "3.9.6",
+    "method": "First compared archived file and trace text with the exact reviewed source print(1 + 1) followed by a newline, then ran that source with python3 -I -c outside the application.",
+    "source": "print(1 + 1)\n",
+    "stdout": "2\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "limitations": [
+    "One successful arithmetic trace demonstrates feasibility only; it does not estimate reliability or general coding accuracy.",
+    "These selected development runs are not randomized, controlled A/B trials. Prompts, options, initial file state, and step budgets changed.",
+    "The successful trace uses only file creation, append fragments, and finish. It does not establish the effectiveness of reading, persistent memory, character entry, or repair.",
+    "Deterministic tests with mocked model decisions validate application contracts, not model accuracy.",
+    "Model decision probabilities are conditional on the options offered and are not calibrated estimates of program correctness.",
+    "The checker covers a restricted Python subset. Matching stdout is a narrower criterion than general semantic correctness.",
+    "Reported latency is from one local development setup, without a controlled warm-up, hardware, or scheduling comparison."
+  ],
+  "runs": [
+    {
+      "label": "original-edit-interface",
+      "source_run_id": "190f5241-3e58-4125-8c5a-49f4557b41fc",
+      "source_record_sha256": "5cc6045b8d790fbd722957d5cba8ecd6ca49fa904a8dd4b63722dafe16fd784a",
+      "source_record_kind": "saved_run",
+      "goal": "Create addition.py that computes 1 + 1 and prints the result.",
+      "model": "jaredpalmer/kev-4b",
+      "recorded_status": "limit",
+      "step_budget": 8,
+      "read_limit_characters": 300,
+      "write_limit_characters": 40,
+      "initial_target_source": "print(",
+      "final_target_source": ")\n",
+      "expected_stdout": "2\n",
+      "goal_satisfied": false,
+      "stop_reason": "step_budget_reached",
+      "metrics": {
+        "executed_tool_steps": 8,
+        "model_decisions": 32,
+        "input_tokens_min": 357,
+        "input_tokens_max": 2233,
+        "input_tokens_cumulative": 29533,
+        "decision_latency_ms_sum": 228783.4,
+        "all_token_counts_match_server": true,
+        "all_inputs_within_3000_tokens": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "tool": "append_file",
+          "choice": "file_0/fragment/open_print",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 6,
+            "content": "print("
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 3,
+              "selected_probability": 0.4485,
+              "input_tokens": 524,
+              "server_reported_input_tokens": 524,
+              "latency_ms": 45735.3
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 357,
+              "server_reported_input_tokens": 357,
+              "latency_ms": 15964.2
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.5784,
+              "input_tokens": 429,
+              "server_reported_input_tokens": 429,
+              "latency_ms": 5041.5
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "open_print",
+              "option_count": 5,
+              "selected_probability": 0.4706,
+              "input_tokens": 537,
+              "server_reported_input_tokens": 537,
+              "latency_ms": 2747
+            }
+          ],
+          "file_edit": {
+            "before": "print(",
+            "after": "print(print(",
+            "start": 6,
+            "end": 6,
+            "inserted_characters": 6
+          }
+        },
+        {
+          "number": 2,
+          "tool": "append_file",
+          "choice": "file_0/fragment/one",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 12,
+            "content": "1"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.4502,
+              "input_tokens": 952,
+              "server_reported_input_tokens": 952,
+              "latency_ms": 4892.9
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 615,
+              "server_reported_input_tokens": 615,
+              "latency_ms": 4412.9
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.6153,
+              "input_tokens": 689,
+              "server_reported_input_tokens": 689,
+              "latency_ms": 4202.5
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "one",
+              "option_count": 5,
+              "selected_probability": 0.3966,
+              "input_tokens": 797,
+              "server_reported_input_tokens": 797,
+              "latency_ms": 4828.3
+            }
+          ],
+          "file_edit": {
+            "before": "print(print(",
+            "after": "print(print(1",
+            "start": 12,
+            "end": 12,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 3,
+          "tool": "replace_file_range",
+          "choice": "current_view/fragment/close_call",
+          "arguments": {
+            "path": "addition.py",
+            "start": 0,
+            "end": 13,
+            "content": ")\n"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "replace_file_range",
+              "option_count": 5,
+              "selected_probability": 0.5799,
+              "input_tokens": 1020,
+              "server_reported_input_tokens": 1020,
+              "latency_ms": 5689
+            },
+            {
+              "stage": "write_range",
+              "choice": "current_view",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 707,
+              "server_reported_input_tokens": 707,
+              "latency_ms": 3873.2
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.7756,
+              "input_tokens": 800,
+              "server_reported_input_tokens": 800,
+              "latency_ms": 4913.3
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "close_call",
+              "option_count": 6,
+              "selected_probability": 0.4001,
+              "input_tokens": 918,
+              "server_reported_input_tokens": 918,
+              "latency_ms": 5662.2
+            }
+          ],
+          "file_edit": {
+            "before": "print(print(1",
+            "after": ")\n",
+            "start": 0,
+            "end": 13,
+            "inserted_characters": 2
+          }
+        },
+        {
+          "number": 4,
+          "tool": "append_file",
+          "choice": "file_0/character/char_11",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 2,
+            "content": "+"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.393,
+              "input_tokens": 1083,
+              "server_reported_input_tokens": 1083,
+              "latency_ms": 5125
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 747,
+              "server_reported_input_tokens": 747,
+              "latency_ms": 5620
+            },
+            {
+              "stage": "write_mode",
+              "choice": "character",
+              "option_count": 2,
+              "selected_probability": 0.5575,
+              "input_tokens": 819,
+              "server_reported_input_tokens": 819,
+              "latency_ms": 4710.1
+            },
+            {
+              "stage": "write_character",
+              "choice": "char_11",
+              "option_count": 96,
+              "selected_probability": 0.0798,
+              "input_tokens": 2233,
+              "server_reported_input_tokens": 2233,
+              "latency_ms": 11208.6
+            }
+          ],
+          "file_edit": {
+            "before": ")\n",
+            "after": ")\n+",
+            "start": 2,
+            "end": 2,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 5,
+          "tool": "append_file",
+          "choice": "file_0/character/char_17",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 3,
+            "content": "1"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.2985,
+              "input_tokens": 1154,
+              "server_reported_input_tokens": 1154,
+              "latency_ms": 5956.1
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 744,
+              "server_reported_input_tokens": 744,
+              "latency_ms": 3989.3
+            },
+            {
+              "stage": "write_mode",
+              "choice": "character",
+              "option_count": 2,
+              "selected_probability": 0.5591,
+              "input_tokens": 816,
+              "server_reported_input_tokens": 816,
+              "latency_ms": 4062.4
+            },
+            {
+              "stage": "write_character",
+              "choice": "char_17",
+              "option_count": 96,
+              "selected_probability": 0.0984,
+              "input_tokens": 2230,
+              "server_reported_input_tokens": 2230,
+              "latency_ms": 10521.7
+            }
+          ],
+          "file_edit": {
+            "before": ")\n+",
+            "after": ")\n+1",
+            "start": 3,
+            "end": 3,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 6,
+          "tool": "replace_file_range",
+          "choice": "current_view/fragment/open_print",
+          "arguments": {
+            "path": "addition.py",
+            "start": 0,
+            "end": 4,
+            "content": "print("
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "replace_file_range",
+              "option_count": 5,
+              "selected_probability": 0.3719,
+              "input_tokens": 1159,
+              "server_reported_input_tokens": 1159,
+              "latency_ms": 5930
+            },
+            {
+              "stage": "write_range",
+              "choice": "current_view",
+              "option_count": 3,
+              "selected_probability": 0.3919,
+              "input_tokens": 942,
+              "server_reported_input_tokens": 942,
+              "latency_ms": 5354.7
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.6639,
+              "input_tokens": 937,
+              "server_reported_input_tokens": 937,
+              "latency_ms": 6873
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "open_print",
+              "option_count": 6,
+              "selected_probability": 0.4668,
+              "input_tokens": 1055,
+              "server_reported_input_tokens": 1055,
+              "latency_ms": 5003.3
+            }
+          ],
+          "file_edit": {
+            "before": ")\n+1",
+            "after": "print(",
+            "start": 0,
+            "end": 4,
+            "inserted_characters": 6
+          }
+        },
+        {
+          "number": 7,
+          "tool": "append_file",
+          "choice": "file_0/fragment/one",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 6,
+            "content": "1"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.5171,
+              "input_tokens": 1092,
+              "server_reported_input_tokens": 1092,
+              "latency_ms": 6071.2
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 756,
+              "server_reported_input_tokens": 756,
+              "latency_ms": 6356
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.519,
+              "input_tokens": 828,
+              "server_reported_input_tokens": 828,
+              "latency_ms": 5281.5
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "one",
+              "option_count": 5,
+              "selected_probability": 0.3815,
+              "input_tokens": 936,
+              "server_reported_input_tokens": 936,
+              "latency_ms": 6176.2
+            }
+          ],
+          "file_edit": {
+            "before": "print(",
+            "after": "print(1",
+            "start": 6,
+            "end": 6,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 8,
+          "tool": "replace_file_range",
+          "choice": "current_view/fragment/close_call",
+          "arguments": {
+            "path": "addition.py",
+            "start": 0,
+            "end": 7,
+            "content": ")\n"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "replace_file_range",
+              "option_count": 5,
+              "selected_probability": 0.5089,
+              "input_tokens": 1074,
+              "server_reported_input_tokens": 1074,
+              "latency_ms": 6005.9
+            },
+            {
+              "stage": "write_range",
+              "choice": "current_view",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 761,
+              "server_reported_input_tokens": 761,
+              "latency_ms": 4735.3
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.7548,
+              "input_tokens": 852,
+              "server_reported_input_tokens": 852,
+              "latency_ms": 5681.1
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "close_call",
+              "option_count": 6,
+              "selected_probability": 0.4108,
+              "input_tokens": 970,
+              "server_reported_input_tokens": 970,
+              "latency_ms": 6159.7
+            }
+          ],
+          "file_edit": {
+            "before": "print(1",
+            "after": ")\n",
+            "start": 0,
+            "end": 7,
+            "inserted_characters": 2
+          }
+        }
+      ]
+    },
+    {
+      "label": "intermediate-edit-interface",
+      "source_run_id": "396a7d14-57eb-4641-9cfd-77f7d7ffbfa6",
+      "source_record_sha256": "48c2921bd8b3a5501954323122562f96ebc59393de358d715d89455c8315c46e",
+      "source_record_kind": "saved_run",
+      "goal": "Create addition.py that computes 1 + 1 and prints the result.",
+      "model": "jaredpalmer/kev-4b",
+      "recorded_status": "stopped",
+      "step_budget": 18,
+      "read_limit_characters": 300,
+      "write_limit_characters": 40,
+      "initial_target_source": null,
+      "final_target_source": "print()",
+      "expected_stdout": "2\n",
+      "goal_satisfied": false,
+      "stop_reason": "stopped_externally_before_step_budget",
+      "metrics": {
+        "executed_tool_steps": 11,
+        "model_decisions": 46,
+        "input_tokens_min": 371,
+        "input_tokens_max": 1318,
+        "input_tokens_cumulative": 45095,
+        "decision_latency_ms_sum": 408322.3,
+        "all_token_counts_match_server": true,
+        "all_inputs_within_3000_tokens": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "tool": "create_file",
+          "choice": "file_0",
+          "arguments": {
+            "path": "addition.py"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "create_file",
+              "option_count": 2,
+              "selected_probability": 0.6,
+              "input_tokens": 467,
+              "server_reported_input_tokens": 467,
+              "latency_ms": 38048.2
+            },
+            {
+              "stage": "arguments",
+              "choice": "file_0",
+              "option_count": 2,
+              "selected_probability": 0.9733,
+              "input_tokens": 371,
+              "server_reported_input_tokens": 371,
+              "latency_ms": 26211.1
+            }
+          ],
+          "file_edit": {
+            "before": null,
+            "after": "",
+            "start": 0,
+            "end": 0,
+            "inserted_characters": 0
+          }
+        },
+        {
+          "number": 2,
+          "tool": "append_file",
+          "choice": "file_0/fragment/open_print",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 0,
+            "content": "print("
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 4,
+              "selected_probability": 0.6195,
+              "input_tokens": 857,
+              "server_reported_input_tokens": 857,
+              "latency_ms": 19536.5
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 556,
+              "server_reported_input_tokens": 556,
+              "latency_ms": 19507.8
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.8112,
+              "input_tokens": 629,
+              "server_reported_input_tokens": 629,
+              "latency_ms": 9917.1
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "open_print",
+              "option_count": 5,
+              "selected_probability": 0.432,
+              "input_tokens": 955,
+              "server_reported_input_tokens": 955,
+              "latency_ms": 7770.7
+            }
+          ],
+          "file_edit": {
+            "before": "",
+            "after": "print(",
+            "start": 0,
+            "end": 0,
+            "inserted_characters": 6
+          }
+        },
+        {
+          "number": 3,
+          "tool": "append_file",
+          "choice": "file_0/fragment/one",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 6,
+            "content": "1"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.5506,
+              "input_tokens": 1121,
+              "server_reported_input_tokens": 1121,
+              "latency_ms": 8328.5
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 647,
+              "server_reported_input_tokens": 647,
+              "latency_ms": 5671.4
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.6236,
+              "input_tokens": 720,
+              "server_reported_input_tokens": 720,
+              "latency_ms": 6434.9
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "one",
+              "option_count": 5,
+              "selected_probability": 0.4098,
+              "input_tokens": 1054,
+              "server_reported_input_tokens": 1054,
+              "latency_ms": 8444
+            }
+          ],
+          "file_edit": {
+            "before": "print(",
+            "after": "print(1",
+            "start": 6,
+            "end": 6,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 4,
+          "tool": "append_file",
+          "choice": "file_0/fragment/close_call",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 7,
+            "content": ")\n"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.4704,
+              "input_tokens": 1175,
+              "server_reported_input_tokens": 1175,
+              "latency_ms": 7706.3
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 701,
+              "server_reported_input_tokens": 701,
+              "latency_ms": 5396.7
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.5,
+              "input_tokens": 774,
+              "server_reported_input_tokens": 774,
+              "latency_ms": 5275.9
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "close_call",
+              "option_count": 5,
+              "selected_probability": 0.4562,
+              "input_tokens": 1118,
+              "server_reported_input_tokens": 1118,
+              "latency_ms": 8069
+            }
+          ],
+          "file_edit": {
+            "before": "print(1",
+            "after": "print(1)\n",
+            "start": 7,
+            "end": 7,
+            "inserted_characters": 2
+          }
+        },
+        {
+          "number": 5,
+          "tool": "replace_file_range",
+          "choice": "token_3/fragment/remove",
+          "arguments": {
+            "path": "addition.py",
+            "start": 6,
+            "end": 7,
+            "content": ""
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "replace_file_range",
+              "option_count": 5,
+              "selected_probability": 0.3597,
+              "input_tokens": 1190,
+              "server_reported_input_tokens": 1190,
+              "latency_ms": 8338.4
+            },
+            {
+              "stage": "write_range",
+              "choice": "token_3",
+              "option_count": 11,
+              "selected_probability": 0.2609,
+              "input_tokens": 1066,
+              "server_reported_input_tokens": 1066,
+              "latency_ms": 6647.5
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.5356,
+              "input_tokens": 901,
+              "server_reported_input_tokens": 901,
+              "latency_ms": 6481.4
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "remove",
+              "option_count": 6,
+              "selected_probability": 0.3067,
+              "input_tokens": 1317,
+              "server_reported_input_tokens": 1317,
+              "latency_ms": 9704.1
+            }
+          ],
+          "file_edit": {
+            "before": "print(1)\n",
+            "after": "print()\n",
+            "start": 6,
+            "end": 7,
+            "inserted_characters": 0
+          }
+        },
+        {
+          "number": 6,
+          "tool": "replace_file_range",
+          "choice": "current_view/fragment/open_print",
+          "arguments": {
+            "path": "addition.py",
+            "start": 0,
+            "end": 8,
+            "content": "print("
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "replace_file_range",
+              "option_count": 5,
+              "selected_probability": 0.3388,
+              "input_tokens": 1207,
+              "server_reported_input_tokens": 1207,
+              "latency_ms": 8299.3
+            },
+            {
+              "stage": "write_range",
+              "choice": "current_view",
+              "option_count": 10,
+              "selected_probability": 0.228,
+              "input_tokens": 1056,
+              "server_reported_input_tokens": 1056,
+              "latency_ms": 7804.3
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.734,
+              "input_tokens": 918,
+              "server_reported_input_tokens": 918,
+              "latency_ms": 6690.3
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "open_print",
+              "option_count": 6,
+              "selected_probability": 0.359,
+              "input_tokens": 1315,
+              "server_reported_input_tokens": 1315,
+              "latency_ms": 7805
+            }
+          ],
+          "file_edit": {
+            "before": "print()\n",
+            "after": "print(",
+            "start": 0,
+            "end": 8,
+            "inserted_characters": 6
+          }
+        },
+        {
+          "number": 7,
+          "tool": "append_file",
+          "choice": "file_0/character/char_9",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 6,
+            "content": ")"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.4475,
+              "input_tokens": 1224,
+              "server_reported_input_tokens": 1224,
+              "latency_ms": 9055.1
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 750,
+              "server_reported_input_tokens": 750,
+              "latency_ms": 5249.1
+            },
+            {
+              "stage": "write_mode",
+              "choice": "character",
+              "option_count": 2,
+              "selected_probability": 0.5298,
+              "input_tokens": 823,
+              "server_reported_input_tokens": 823,
+              "latency_ms": 5179.3
+            },
+            {
+              "stage": "write_character_group",
+              "choice": "symbols_2",
+              "option_count": 15,
+              "selected_probability": 0.1986,
+              "input_tokens": 1021,
+              "server_reported_input_tokens": 1021,
+              "latency_ms": 6632.2
+            },
+            {
+              "stage": "write_character",
+              "choice": "char_9",
+              "option_count": 8,
+              "selected_probability": 0.4072,
+              "input_tokens": 1318,
+              "server_reported_input_tokens": 1318,
+              "latency_ms": 7234.7
+            }
+          ],
+          "file_edit": {
+            "before": "print(",
+            "after": "print()",
+            "start": 6,
+            "end": 6,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 8,
+          "tool": "append_file",
+          "choice": "file_0/character/char_11",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 7,
+            "content": "+"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.3249,
+              "input_tokens": 1217,
+              "server_reported_input_tokens": 1217,
+              "latency_ms": 8034.2
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 743,
+              "server_reported_input_tokens": 743,
+              "latency_ms": 5271.8
+            },
+            {
+              "stage": "write_mode",
+              "choice": "character",
+              "option_count": 2,
+              "selected_probability": 0.5316,
+              "input_tokens": 816,
+              "server_reported_input_tokens": 816,
+              "latency_ms": 5804.5
+            },
+            {
+              "stage": "write_character_group",
+              "choice": "symbols_2",
+              "option_count": 15,
+              "selected_probability": 0.2078,
+              "input_tokens": 1014,
+              "server_reported_input_tokens": 1014,
+              "latency_ms": 7500.7
+            },
+            {
+              "stage": "write_character",
+              "choice": "char_11",
+              "option_count": 8,
+              "selected_probability": 0.2303,
+              "input_tokens": 1310,
+              "server_reported_input_tokens": 1310,
+              "latency_ms": 8501.9
+            }
+          ],
+          "file_edit": {
+            "before": "print()",
+            "after": "print()+",
+            "start": 7,
+            "end": 7,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 9,
+          "tool": "append_file",
+          "choice": "file_0/character/char_9",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 8,
+            "content": ")"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.3357,
+              "input_tokens": 1215,
+              "server_reported_input_tokens": 1215,
+              "latency_ms": 8285.2
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 740,
+              "server_reported_input_tokens": 740,
+              "latency_ms": 8399.9
+            },
+            {
+              "stage": "write_mode",
+              "choice": "character",
+              "option_count": 2,
+              "selected_probability": 0.6217,
+              "input_tokens": 813,
+              "server_reported_input_tokens": 813,
+              "latency_ms": 6245
+            },
+            {
+              "stage": "write_character_group",
+              "choice": "symbols_2",
+              "option_count": 15,
+              "selected_probability": 0.2587,
+              "input_tokens": 1011,
+              "server_reported_input_tokens": 1011,
+              "latency_ms": 6362.5
+            },
+            {
+              "stage": "write_character",
+              "choice": "char_9",
+              "option_count": 8,
+              "selected_probability": 0.3197,
+              "input_tokens": 1315,
+              "server_reported_input_tokens": 1315,
+              "latency_ms": 8106.7
+            }
+          ],
+          "file_edit": {
+            "before": "print()+",
+            "after": "print()+)",
+            "start": 8,
+            "end": 8,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 10,
+          "tool": "replace_file_range",
+          "choice": "current_view/fragment/open_print",
+          "arguments": {
+            "path": "addition.py",
+            "start": 0,
+            "end": 9,
+            "content": "print("
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "replace_file_range",
+              "option_count": 5,
+              "selected_probability": 0.3791,
+              "input_tokens": 1206,
+              "server_reported_input_tokens": 1206,
+              "latency_ms": 8050.4
+            },
+            {
+              "stage": "write_range",
+              "choice": "current_view",
+              "option_count": 11,
+              "selected_probability": 0.1796,
+              "input_tokens": 1079,
+              "server_reported_input_tokens": 1079,
+              "latency_ms": 7942
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.7819,
+              "input_tokens": 917,
+              "server_reported_input_tokens": 917,
+              "latency_ms": 6653.7
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "open_print",
+              "option_count": 6,
+              "selected_probability": 0.35,
+              "input_tokens": 1317,
+              "server_reported_input_tokens": 1317,
+              "latency_ms": 7877.1
+            }
+          ],
+          "file_edit": {
+            "before": "print()+)",
+            "after": "print(",
+            "start": 0,
+            "end": 9,
+            "inserted_characters": 6
+          }
+        },
+        {
+          "number": 11,
+          "tool": "append_file",
+          "choice": "file_0/character/char_9",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 6,
+            "content": ")"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.4906,
+              "input_tokens": 1223,
+              "server_reported_input_tokens": 1223,
+              "latency_ms": 8241.2
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 749,
+              "server_reported_input_tokens": 749,
+              "latency_ms": 6939.1
+            },
+            {
+              "stage": "write_mode",
+              "choice": "character",
+              "option_count": 2,
+              "selected_probability": 0.5784,
+              "input_tokens": 822,
+              "server_reported_input_tokens": 822,
+              "latency_ms": 5763.6
+            },
+            {
+              "stage": "write_character_group",
+              "choice": "symbols_2",
+              "option_count": 15,
+              "selected_probability": 0.2004,
+              "input_tokens": 1020,
+              "server_reported_input_tokens": 1020,
+              "latency_ms": 5782.2
+            },
+            {
+              "stage": "write_character",
+              "choice": "char_9",
+              "option_count": 8,
+              "selected_probability": 0.4429,
+              "input_tokens": 1317,
+              "server_reported_input_tokens": 1317,
+              "latency_ms": 7121.8
+            }
+          ],
+          "file_edit": {
+            "before": "print(",
+            "after": "print()",
+            "start": 6,
+            "end": 6,
+            "inserted_characters": 1
+          }
+        }
+      ]
+    },
+    {
+      "label": "aligned-edit-interface",
+      "source_run_id": "4d84906e-17b6-4495-8814-0adb318469d9",
+      "source_record_sha256": "0b8a0abbf6958e528edaa868721b9e7b90864ed0f2b547677086ee9b27e965cc",
+      "source_record_kind": "reset_archive",
+      "goal": "Create addition.py that computes 1 + 1 and prints the result.",
+      "model": "jaredpalmer/kev-4b",
+      "recorded_status": "ended",
+      "step_budget": 18,
+      "read_limit_characters": 300,
+      "write_limit_characters": 40,
+      "initial_target_source": null,
+      "final_target_source": "print(1 + 1)\n",
+      "expected_stdout": "2\n",
+      "goal_satisfied": true,
+      "stop_reason": "model_selected_finish_after_checks_passed",
+      "metrics": {
+        "executed_tool_steps": 7,
+        "model_decisions": 23,
+        "input_tokens_min": 371,
+        "input_tokens_max": 1267,
+        "input_tokens_cumulative": 20775,
+        "decision_latency_ms_sum": 157234.7,
+        "all_token_counts_match_server": true,
+        "all_inputs_within_3000_tokens": true
+      },
+      "steps": [
+        {
+          "number": 1,
+          "tool": "create_file",
+          "choice": "file_0",
+          "arguments": {
+            "path": "addition.py"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "create_file",
+              "option_count": 2,
+              "selected_probability": 0.6,
+              "input_tokens": 467,
+              "server_reported_input_tokens": 467,
+              "latency_ms": 16119.3
+            },
+            {
+              "stage": "arguments",
+              "choice": "file_0",
+              "option_count": 2,
+              "selected_probability": 0.9733,
+              "input_tokens": 371,
+              "server_reported_input_tokens": 371,
+              "latency_ms": 4296
+            }
+          ],
+          "file_edit": {
+            "before": null,
+            "after": "",
+            "start": 0,
+            "end": 0,
+            "inserted_characters": 0
+          }
+        },
+        {
+          "number": 2,
+          "tool": "append_file",
+          "choice": "file_0/fragment/open_print",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 0,
+            "content": "print("
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 3,
+              "selected_probability": 0.7388,
+              "input_tokens": 787,
+              "server_reported_input_tokens": 787,
+              "latency_ms": 6324.4
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 556,
+              "server_reported_input_tokens": 556,
+              "latency_ms": 7350.7
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.7566,
+              "input_tokens": 671,
+              "server_reported_input_tokens": 671,
+              "latency_ms": 3861.7
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "open_print",
+              "option_count": 5,
+              "selected_probability": 0.4465,
+              "input_tokens": 1010,
+              "server_reported_input_tokens": 1010,
+              "latency_ms": 5620.7
+            }
+          ],
+          "file_edit": {
+            "before": "",
+            "after": "print(",
+            "start": 0,
+            "end": 0,
+            "inserted_characters": 6
+          }
+        },
+        {
+          "number": 3,
+          "tool": "append_file",
+          "choice": "file_0/fragment/one",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 6,
+            "content": "1"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.5827,
+              "input_tokens": 1137,
+              "server_reported_input_tokens": 1137,
+              "latency_ms": 6803.8
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 647,
+              "server_reported_input_tokens": 647,
+              "latency_ms": 3588.3
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.6675,
+              "input_tokens": 762,
+              "server_reported_input_tokens": 762,
+              "latency_ms": 4748.6
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "one",
+              "option_count": 5,
+              "selected_probability": 0.6715,
+              "input_tokens": 1109,
+              "server_reported_input_tokens": 1109,
+              "latency_ms": 6338.6
+            }
+          ],
+          "file_edit": {
+            "before": "print(",
+            "after": "print(1",
+            "start": 6,
+            "end": 6,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 4,
+          "tool": "append_file",
+          "choice": "file_0/fragment/plus",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 7,
+            "content": " + "
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.4907,
+              "input_tokens": 1191,
+              "server_reported_input_tokens": 1191,
+              "latency_ms": 7033
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 701,
+              "server_reported_input_tokens": 701,
+              "latency_ms": 4852.8
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.6817,
+              "input_tokens": 816,
+              "server_reported_input_tokens": 816,
+              "latency_ms": 4734.5
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "plus",
+              "option_count": 5,
+              "selected_probability": 0.513,
+              "input_tokens": 1173,
+              "server_reported_input_tokens": 1173,
+              "latency_ms": 7584.1
+            }
+          ],
+          "file_edit": {
+            "before": "print(1",
+            "after": "print(1 + ",
+            "start": 7,
+            "end": 7,
+            "inserted_characters": 3
+          }
+        },
+        {
+          "number": 5,
+          "tool": "append_file",
+          "choice": "file_0/fragment/one",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 10,
+            "content": "1"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.526,
+              "input_tokens": 1234,
+              "server_reported_input_tokens": 1234,
+              "latency_ms": 8255.9
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 741,
+              "server_reported_input_tokens": 741,
+              "latency_ms": 4977.1
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.6601,
+              "input_tokens": 858,
+              "server_reported_input_tokens": 858,
+              "latency_ms": 5100.9
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "one",
+              "option_count": 5,
+              "selected_probability": 0.8935,
+              "input_tokens": 1227,
+              "server_reported_input_tokens": 1227,
+              "latency_ms": 7068.9
+            }
+          ],
+          "file_edit": {
+            "before": "print(1 + ",
+            "after": "print(1 + 1",
+            "start": 10,
+            "end": 10,
+            "inserted_characters": 1
+          }
+        },
+        {
+          "number": 6,
+          "tool": "append_file",
+          "choice": "file_0/fragment/close_call",
+          "arguments": {
+            "path": "addition.py",
+            "offset": 11,
+            "content": ")\n"
+          },
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "append_file",
+              "option_count": 5,
+              "selected_probability": 0.4164,
+              "input_tokens": 1230,
+              "server_reported_input_tokens": 1230,
+              "latency_ms": 8764.8
+            },
+            {
+              "stage": "write_target",
+              "choice": "file_0",
+              "option_count": 1,
+              "selected_probability": 1,
+              "input_tokens": 736,
+              "server_reported_input_tokens": 736,
+              "latency_ms": 6499.9
+            },
+            {
+              "stage": "write_mode",
+              "choice": "fragment",
+              "option_count": 2,
+              "selected_probability": 0.6591,
+              "input_tokens": 853,
+              "server_reported_input_tokens": 853,
+              "latency_ms": 5919.6
+            },
+            {
+              "stage": "write_fragment",
+              "choice": "close_call",
+              "option_count": 5,
+              "selected_probability": 0.7158,
+              "input_tokens": 1231,
+              "server_reported_input_tokens": 1231,
+              "latency_ms": 8106.6
+            }
+          ],
+          "file_edit": {
+            "before": "print(1 + 1",
+            "after": "print(1 + 1)\n",
+            "start": 11,
+            "end": 11,
+            "inserted_characters": 2
+          }
+        },
+        {
+          "number": 7,
+          "tool": "finish",
+          "choice": "finish",
+          "arguments": {},
+          "tool_execution_ok": true,
+          "decisions": [
+            {
+              "stage": "tool",
+              "choice": "finish",
+              "option_count": 6,
+              "selected_probability": 0.2629,
+              "input_tokens": 1267,
+              "server_reported_input_tokens": 1267,
+              "latency_ms": 13284.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
